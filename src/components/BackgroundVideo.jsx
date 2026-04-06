@@ -1,3 +1,9 @@
+/**
+ * BackgroundVideo
+ * Full-screen fixed background video.
+ * Video is always visible — no opacity-gate waiting for onCanPlay.
+ * onError hides it only if the src truly fails to load.
+ */
 import { useRef, useEffect, useState } from 'react'
 
 const BG_VIDEOS = [
@@ -10,30 +16,36 @@ const BG_VIDEOS = [
   { url: 'https://assets.mixkit.co/videos/1610/1610-720.mp4',   label: 'Deep Starfield' },
 ]
 
-const PRELOADER_VIDEO =
+// Home-page background video (also used on first visit)
+const HOME_VIDEO =
   'https://vz-7431b15a-30f.b-cdn.net/ef6949a0-ee51-4795-b2a9-1edc3b677a0c/play_480p.mp4'
 
 const isFirstVisit = !localStorage.getItem('ft_visited')
 const SELECTED = isFirstVisit
-  ? { url: PRELOADER_VIDEO, label: 'Fairy Tale Intro' }
+  ? { url: HOME_VIDEO, label: 'Fairy Tale Intro' }
   : BG_VIDEOS[Math.floor(Math.random() * BG_VIDEOS.length)]
 
-export default function BackgroundVideo() {
+export default function BackgroundVideo({ fairyMode = false }) {
   const videoRef = useRef(null)
-  const [loaded,  setLoaded]  = useState(false)
   const [errored, setErrored] = useState(false)
 
   useEffect(() => {
-    videoRef.current?.play().catch(() => {})
+    const vid = videoRef.current
+    if (!vid) return
+    vid.play().catch(() => {
+      // If autoplay blocked, retry on user interaction
+      const retry = () => { vid.play().catch(() => {}); window.removeEventListener('click', retry) }
+      window.addEventListener('click', retry, { once: true })
+    })
   }, [])
 
   return (
     <div aria-hidden="true" className="fixed inset-0 -z-10 overflow-hidden">
 
-      {/* Pure black base so nothing bleeds through before video loads */}
-      <div className="absolute inset-0 bg-black" />
+      {/* Dark base — visible while video buffers */}
+      <div className="absolute inset-0 bg-[#05010F]" />
 
-      {/* ── Video — full brightness, no opacity reduction ── */}
+      {/* ── Background video — always visible once src is set ── */}
       {!errored && (
         <video
           ref={videoRef}
@@ -43,30 +55,45 @@ export default function BackgroundVideo() {
           loop
           playsInline
           preload="auto"
-          onCanPlay={() => setLoaded(true)}
           onError={() => setErrored(true)}
           className="absolute inset-0 w-full h-full object-cover"
           style={{
-            opacity:    loaded ? 1 : 0,
-            transition: 'opacity 1.2s ease',
+            opacity: fairyMode ? 0.72 : 1,
+            filter:  fairyMode
+              ? 'brightness(0.88) saturate(1.25) hue-rotate(12deg)'
+              : 'none',
+            transition: 'opacity 1.5s ease, filter 1.5s ease',
           }}
           aria-label={SELECTED.label}
         />
       )}
 
-      {/* ── Single lightweight overlay — just enough to keep text readable ── */}
+      {/* ── Readability gradient ── */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.20) 50%, rgba(0,0,0,0.55) 100%)',
+          background:
+            'linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.20) 50%, rgba(0,0,0,0.55) 100%)',
         }}
       />
 
-      {/* Subtle purple tint for fairy-tale atmosphere */}
+      {/* ── Purple tint ── */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse 80% 60% at 50% 30%, rgba(80,20,180,0.18) 0%, transparent 70%)',
+          background:
+            'radial-gradient(ellipse 80% 60% at 50% 30%, rgba(80,20,180,0.18) 0%, transparent 70%)',
+        }}
+      />
+
+      {/* ── Fairy-mode overlay ── */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 110% 110% at 50% 38%, rgba(100,0,210,0.42) 0%, rgba(236,72,153,0.22) 52%, transparent 78%)',
+          opacity:    fairyMode ? 1 : 0,
+          transition: 'opacity 1.5s ease',
         }}
       />
     </div>

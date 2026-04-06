@@ -12,9 +12,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Sparkles, Star } from 'lucide-react'
 
 const PRELOADER_VIDEO =
-  'https://vz-7431b15a-30f.b-cdn.net/ef6949a0-ee51-4795-b2a9-1edc3b677a0c/play_480p.mp4'
+  'https://vz-7431b15a-30f.b-cdn.net/b84f3a69-7654-4520-8413-4a9662ce7d75/play_480p.mp4'
 
-const DURATION = 8000 // ms
+const DURATION = 10000 // ms
 
 export default function Preloader({ onComplete }) {
   const videoRef    = useRef(null)
@@ -50,8 +50,14 @@ export default function Preloader({ onComplete }) {
 
   // ── 8-second timer → fade out ─────────────────────────────────────────
   useEffect(() => {
-    // Try to autoplay
-    videoRef.current?.play().catch(() => {})
+    // Try to autoplay; retry on first user interaction if blocked
+    const vid = videoRef.current
+    if (vid) {
+      vid.play().catch(() => {
+        const retry = () => { vid.play().catch(() => {}); window.removeEventListener('click', retry) }
+        window.addEventListener('click', retry, { once: true })
+      })
+    }
 
     timerRef.current = setTimeout(() => {
       setFading(true)
@@ -74,7 +80,7 @@ export default function Preloader({ onComplete }) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: 'easeInOut' }}
           className="fixed inset-0 z-[200] flex flex-col items-center justify-center overflow-hidden bg-fairy-deep"
-          aria-label="Loading fairy tale portal"
+          aria-label="Chargement du portail de contes de fées"
           aria-live="polite"
         >
           {/* ── Full-screen intro video ──────────────────────────── */}
@@ -90,22 +96,22 @@ export default function Preloader({ onComplete }) {
             style={{ zIndex: 0 }}
           />
 
-          {/* ── Dark overlay for readability ─────────────────────── */}
+          {/* ── Light overlay — just enough for text readability ─── */}
           <div
             className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(to bottom, rgba(5,1,15,0.55) 0%, rgba(5,1,15,0.30) 50%, rgba(5,1,15,0.80) 100%)',
+                'linear-gradient(to bottom, rgba(5,1,15,0.15) 0%, rgba(5,1,15,0.05) 50%, rgba(5,1,15,0.40) 100%)',
               zIndex: 1,
             }}
           />
 
-          {/* ── Purple radial glow ───────────────────────────────── */}
+          {/* ── Subtle purple tint ───────────────────────────────── */}
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
               background:
-                'radial-gradient(ellipse 70% 50% at 50% 40%, rgba(109,40,217,0.30) 0%, transparent 70%)',
+                'radial-gradient(ellipse 70% 50% at 50% 40%, rgba(109,40,217,0.10) 0%, transparent 70%)',
               zIndex: 2,
             }}
           />
@@ -144,16 +150,16 @@ export default function Preloader({ onComplete }) {
             {/* Title */}
             <div className="space-y-1">
               <h1 className="font-cinzel font-black text-3xl sm:text-5xl shimmer-text leading-tight">
-                Magical Fairy Tales
+                Contes de Fées Magiques
               </h1>
               <p className="font-body text-fairy-mist/80 text-sm sm:text-base tracking-widest uppercase">
-                A Dream World for Kids
+                Un Monde de Rêve pour Enfants
               </p>
             </div>
 
             {/* Loading text */}
             <p className="font-body text-fairy-lavender/80 text-sm sm:text-base font-medium">
-              Opening the storybook{dots}
+              Ouverture du livre de contes{dots}
             </p>
           </div>
 
@@ -204,9 +210,9 @@ export default function Preloader({ onComplete }) {
               transition-all duration-200
             "
             style={{ zIndex: 4 }}
-            aria-label="Skip intro"
+            aria-label="Passer l'intro"
           >
-            Skip ›
+            Passer ›
           </motion.button>
         </motion.div>
       ) : (

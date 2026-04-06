@@ -1,13 +1,13 @@
 import { motion } from 'framer-motion'
-import { Play, Clock, Tag } from 'lucide-react'
+import { Play, Clock } from 'lucide-react'
 
 const CATEGORY_COLORS = {
-  'Princess Tales':   'from-pink-500 to-rose-400',
-  'Animal Tales':     'from-emerald-500 to-teal-400',
-  'Magic Tales':      'from-violet-500 to-purple-400',
-  'Bedtime Stories':  'from-indigo-500 to-blue-400',
-  'Adventure Tales':  'from-amber-500 to-orange-400',
-  'Short Stories':    'from-cyan-500 to-sky-400',
+  'Contes de Princesses': 'from-pink-500 to-rose-400',
+  "Contes d'Animaux":     'from-emerald-500 to-teal-400',
+  'Contes Magiques':      'from-violet-500 to-purple-400',
+  'Histoires du Soir':    'from-indigo-500 to-blue-400',
+  "Contes d'Aventure":    'from-amber-500 to-orange-400',
+  'Histoires Courtes':    'from-cyan-500 to-sky-400',
 }
 
 export default function VideoCard({ video, onPlay, index = 0 }) {
@@ -35,7 +35,7 @@ export default function VideoCard({ video, onPlay, index = 0 }) {
       role="button"
       tabIndex={0}
       onKeyDown={(e) => e.key === 'Enter' && onPlay(video)}
-      aria-label={`Play ${video.title}`}
+      aria-label={`Regarder ${video.title}`}
     >
       {/* ── Thumbnail ─────────────────────────────────────────────── */}
       <div className="relative overflow-hidden aspect-video bg-fairy-dark/80">
@@ -131,7 +131,7 @@ export default function VideoCard({ video, onPlay, index = 0 }) {
           "
         >
           <Play className="w-3.5 h-3.5" />
-          Watch Story
+          Regarder
         </motion.div>
       </div>
 

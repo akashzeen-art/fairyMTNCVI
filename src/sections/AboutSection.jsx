@@ -6,33 +6,33 @@ const FEATURES = [
     Icon:    Shield,
     color:   'from-emerald-500 to-teal-400',
     glow:    'rgba(16,185,129,0.3)',
-    title:   'Safe for Kids',
+    title:   'Sécurisé pour les Enfants',
     description:
-      'Every story is carefully curated — no ads, no violence, no scary content. Just pure, joyful storytelling for little hearts.',
+      'Chaque histoire est soigneusement sélectionnée — sans publicités, sans violence, sans contenu effrayant. Que de la joie pour les petits cœurs.',
   },
   {
     Icon:    Heart,
     color:   'from-pink-500 to-rose-400',
     glow:    'rgba(236,72,153,0.3)',
-    title:   'Fun Storytelling',
+    title:   'Contes Amusants',
     description:
-      'Bright visuals, warm narrations, and exciting adventures keep children engaged and spark their love for stories.',
+      'Des visuels colorés, des narrations chaleureuses et des aventures palpitantes maintiennent l\'intérêt des enfants et éveillent leur amour des histoires.',
   },
   {
     Icon:    Sparkles,
     color:   'from-violet-500 to-purple-400',
     glow:    'rgba(139,92,246,0.3)',
-    title:   'Magical World',
+    title:   'Monde Magique',
     description:
-      'A dreamy fairy-tale universe full of castles, dragons, enchanted forests, and all the wonder a child\'s imagination needs.',
+      'Un univers de contes de fées plein de châteaux, dragons, forêts enchantées et tout l\'émerveillement dont l\'imagination d\'un enfant a besoin.',
   },
   {
     Icon:    Moon,
     color:   'from-indigo-500 to-blue-400',
     glow:    'rgba(99,102,241,0.3)',
-    title:   'Bedtime Friendly',
+    title:   'Idéal pour le Soir',
     description:
-      'Soothing bedtime stories with soft music and gentle narrations help little ones wind down and drift into sweet dreams.',
+      'Des histoires apaisantes avec une douce musique et des narrations bienveillantes aident les petits à se détendre et à plonger dans de beaux rêves.',
   },
 ]
 
@@ -61,19 +61,19 @@ export default function AboutSection() {
           <div className="flex items-center justify-center gap-3 mb-3">
             <div className="h-px w-12 bg-gradient-to-r from-transparent to-fairy-cyan" />
             <span className="text-fairy-cyan font-body font-bold text-sm tracking-widest uppercase">
-              About Us
+              À Propos
             </span>
             <div className="h-px w-12 bg-gradient-to-l from-transparent to-fairy-cyan" />
           </div>
           <h2 className="section-title text-2xl sm:text-3xl md:text-4xl gradient-text mb-4">
-            Why Families Love Us
+            Pourquoi les Familles Nous Adorent
           </h2>
           <p className="
             text-fairy-mist/65 font-body text-sm sm:text-base
             max-w-xl mx-auto leading-relaxed
           ">
-            We believe every child deserves a magical world of stories — thoughtfully crafted,
-            beautifully designed, and always safe.
+            Nous croyons que chaque enfant mérite un monde magique d'histoires — soigneusement
+            conçu, joliment présenté et toujours sécurisé.
           </p>
         </motion.div>
 
@@ -160,12 +160,12 @@ export default function AboutSection() {
             text-fairy-white text-shadow-glow
             leading-relaxed italic max-w-2xl mx-auto
           ">
-            "Every child is born believing in magic.
+            « Chaque enfant naît en croyant à la magie.
             <br className="hidden sm:block" />
-            We just help them remember."
+            Nous l'aidons simplement à s'en souvenir. »
           </blockquote>
           <p className="mt-4 text-fairy-mist/50 font-body text-sm">
-            — The FairyTales Team
+            — L'Équipe FablesDesFées
           </p>
         </motion.div>
       </div>

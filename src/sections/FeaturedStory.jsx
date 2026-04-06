@@ -29,13 +29,13 @@ export default function FeaturedStory({ onPlay }) {
             <div className="h-px w-12 bg-gradient-to-r from-transparent to-fairy-violet" />
             <Sparkles className="w-5 h-5 text-fairy-gold animate-sparkle" />
             <span className="text-fairy-lavender font-body font-bold text-sm tracking-widest uppercase">
-              Featured Story
+              Histoire à la Une
             </span>
             <Sparkles className="w-5 h-5 text-fairy-gold animate-sparkle" />
             <div className="h-px w-12 bg-gradient-to-l from-transparent to-fairy-violet" />
           </div>
           <h2 className="section-title text-2xl sm:text-3xl md:text-4xl gradient-text">
-            Story of the Day
+            Histoire du Jour
           </h2>
         </motion.div>
 
@@ -92,7 +92,7 @@ export default function FeaturedStory({ onPlay }) {
                 absolute inset-0 flex items-center justify-center
                 focus:outline-none
               "
-              aria-label={`Play ${video.title}`}
+              aria-label={`Regarder ${video.title}`}
             >
               <div className="
                 w-20 h-20 rounded-full
@@ -174,7 +174,7 @@ export default function FeaturedStory({ onPlay }) {
               "
             >
               <Play className="w-4 h-4" fill="white" />
-              Watch Story
+              Voir l'Histoire
             </motion.button>
           </div>
         </motion.div>

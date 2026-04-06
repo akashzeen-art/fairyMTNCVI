@@ -4,9 +4,9 @@ import { Sparkles, Menu, X, Star } from 'lucide-react'
 // Sparkles used in logo only
 
 const NAV_LINKS = [
-  { label: 'Home',    href: '#hero' },
-  { label: 'Stories', href: '#stories' },
-  { label: 'About',   href: '#about' },
+  { label: 'Accueil',   href: '#hero' },
+  { label: 'Histoires', href: '#stories' },
+  { label: 'À Propos',  href: '#about' },
 ]
 
 export default function Navbar() {
@@ -69,7 +69,7 @@ export default function Navbar() {
               <Star className="w-3 h-3 text-fairy-pink absolute -top-1 -right-1 animate-twinkle" />
             </div>
             <span className="font-cinzel text-lg sm:text-xl font-bold gradient-text leading-none">
-              FairyTales
+              Contes de Fées
             </span>
           </motion.a>
 
@@ -107,7 +107,7 @@ export default function Navbar() {
             "
             onClick={() => setMenuOpen((o) => !o)}
             whileTap={{ scale: 0.9 }}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
           >
             {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </motion.button>
