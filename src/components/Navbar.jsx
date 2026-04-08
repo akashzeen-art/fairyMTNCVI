@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Sparkles, Menu, X, Star } from 'lucide-react'
-// Sparkles used in logo only
+import { Menu, X } from 'lucide-react'
 
 const NAV_LINKS = [
   { label: 'Accueil',   href: '#hero' },
@@ -60,17 +59,15 @@ export default function Navbar() {
           <motion.a
             href="#hero"
             onClick={(e) => { e.preventDefault(); handleNav('#hero') }}
-            className="flex items-center gap-2 group"
+            className="flex items-center group"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
           >
-            <div className="relative">
-              <Sparkles className="w-7 h-7 text-fairy-gold animate-sparkle" />
-              <Star className="w-3 h-3 text-fairy-pink absolute -top-1 -right-1 animate-twinkle" />
-            </div>
-            <span className="font-cinzel text-lg sm:text-xl font-bold gradient-text leading-none">
-              Contes de Fées
-            </span>
+            <img 
+              src="/logo/fairyfinal111.png" 
+              alt="Fairy Tales Logo" 
+              className="h-32 sm:h-32 w-auto object-contain"
+            />
           </motion.a>
 
           {/* ── Desktop links ────────────────────────────────────────── */}
