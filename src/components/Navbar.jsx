@@ -66,7 +66,7 @@ export default function Navbar() {
             <img 
               src="/logo/fairyfinal111.png" 
               alt="Fairy Tales Logo" 
-              className="h-32 sm:h-32 w-auto object-contain"
+              className="h-16 sm:h-16 w-auto object-contain"
             />
           </motion.a>
 
