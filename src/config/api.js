@@ -11,9 +11,8 @@ export const ENDPOINTS = {
 }
 
 export function buildUrl(path, params) {
-  const base = import.meta.env.DEV && !import.meta.env.VITE_API_BASE
-    ? window.location.origin
-    : API_BASE
+  const base = import.meta.env.VITE_API_BASE
+    ?? (typeof window !== 'undefined' ? window.location.origin : API_BASE)
   const url = new URL(path, base)
   Object.entries(params).forEach(([key, value]) => {
     url.searchParams.set(key, String(value ?? 0))
