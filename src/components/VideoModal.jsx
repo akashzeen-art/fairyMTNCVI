@@ -4,9 +4,10 @@
  * Close with: ✕ button, Escape key, or clicking the backdrop.
  */
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Sparkles, Clock } from 'lucide-react'
+import { X, Sparkles, Clock, Loader2 } from 'lucide-react'
+import { checkSubscriptionStatus, redirectToCampaign, isActiveStatus } from '../services/amftApi'
 
 const CATEGORY_COLORS = {
   'Contes de Princesses': 'from-pink-500 to-rose-400',
@@ -17,8 +18,28 @@ const CATEGORY_COLORS = {
   'Histoires Courtes':    'from-cyan-500 to-sky-400',
 }
 
-export default function VideoModal({ video, onClose }) {
+export default function VideoModal({ video, subid, productcode, msisdn, onClose }) {
   const videoRef = useRef(null)
+  const [verifying, setVerifying] = useState(true)
+
+  // Status check on every content page load
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      try {
+        const data = await checkSubscriptionStatus(subid, productcode, msisdn)
+        if (cancelled) return
+        if (!isActiveStatus(data.status)) {
+          redirectToCampaign(subid, productcode, msisdn)
+          return
+        }
+        setVerifying(false)
+      } catch {
+        if (!cancelled) redirectToCampaign(subid, productcode, msisdn)
+      }
+    })()
+    return () => { cancelled = true }
+  }, [subid, productcode, msisdn])
 
   // ESC key to close
   useEffect(() => {
@@ -33,11 +54,12 @@ export default function VideoModal({ video, onClose }) {
     return () => { document.body.style.overflow = '' }
   }, [])
 
-  // Auto-play when modal opens
+  // Auto-play once subscription is verified
   useEffect(() => {
+    if (verifying) return
     const vid = videoRef.current
     if (vid) vid.play().catch(() => {})
-  }, [video])
+  }, [video, verifying])
 
   if (!video) return null
 
@@ -130,18 +152,25 @@ export default function VideoModal({ video, onClose }) {
 
           {/* ── Video player ─────────────────────────────────────── */}
           <div className="relative bg-black aspect-video w-full">
-            <video
-              ref={videoRef}
-              src={video.videoUrl}
-              poster={video.thumbnail}
-              controls
-              controlsList="nodownload"
-              autoPlay
-              playsInline
-              preload="auto"
-              className="w-full h-full object-contain"
-              style={{ maxHeight: '60vh' }}
-            />
+            {verifying ? (
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 text-fairy-mist">
+                <Loader2 className="w-8 h-8 animate-spin text-fairy-violet" />
+                <p className="text-sm font-body">Vérification de l'abonnement...</p>
+              </div>
+            ) : (
+              <video
+                ref={videoRef}
+                src={video.videoUrl}
+                poster={video.thumbnail}
+                controls
+                controlsList="nodownload"
+                autoPlay
+                playsInline
+                preload="auto"
+                className="w-full h-full object-contain"
+                style={{ maxHeight: '60vh' }}
+              />
+            )}
           </div>
 
           {/* ── Description ──────────────────────────────────────── */}
