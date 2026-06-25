@@ -150,7 +150,7 @@ export default function Preloader({ onComplete }) {
             {/* Title */}
             <div className="space-y-1">
               <h1 className="font-cinzel font-black text-3xl sm:text-5xl shimmer-text leading-tight">
-                Contes Magiques
+                Contes De Fées
               </h1>
               <p className="font-body text-fairy-mist/80 text-sm sm:text-base tracking-widest uppercase">
                 Un Monde de Rêve pour Enfants

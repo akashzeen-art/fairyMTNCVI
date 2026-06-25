@@ -57,7 +57,7 @@ export default function MobileNumberModal() {
           </div>
 
           <p className="text-sm text-fairy-mist/70 font-body mb-6">
-            Saisissez votre numéro de mobile ivoirien pour accéder aux contes magiques.
+            Saisissez votre numéro de mobile ivoirien pour accéder aux Contes De Fées.
           </p>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">

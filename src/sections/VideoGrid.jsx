@@ -18,7 +18,7 @@ const CATEGORY_ICONS = {
   'Tout':                  '🌟',
   'Contes de Princesses':  '👑',
   "Contes d'Animaux":      '🦊',
-  'Contes Magiques':       '🔮',
+  'Contes De Fées':       '🔮',
   'Histoires du Soir':     '🌙',
   "Contes d'Aventure":     '⚔️',
   'Histoires Courtes':     '📖',

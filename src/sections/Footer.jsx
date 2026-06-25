@@ -23,7 +23,7 @@ export default function Footer() {
           {/* Logo */}
           <div className="flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-fairy-gold animate-sparkle" />
-            <span className="font-cinzel font-bold text-lg gradient-text">Contes Magiques</span>
+            <span className="font-cinzel font-bold text-lg gradient-text">Contes De Fées</span>
           </div>
 
           <p className="text-fairy-mist/50 font-body text-xs leading-relaxed max-w-sm">
@@ -32,7 +32,7 @@ export default function Footer() {
 
           {/* Copyright only */}
           <p className="flex items-center gap-1 text-fairy-mist/35 font-body text-xs mt-1">
-            © {new Date().getFullYear()} Contes Magiques · Fait avec
+            © {new Date().getFullYear()} Contes De Fées · Fait avec
             <Heart className="w-3 h-3 text-fairy-pink mx-0.5" fill="#EC4899" />
             pour les petits rêveurs
           </p>

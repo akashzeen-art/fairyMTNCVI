@@ -4,7 +4,7 @@ import { Play, Clock } from 'lucide-react'
 const CATEGORY_COLORS = {
   'Contes de Princesses': 'from-pink-500 to-rose-400',
   "Contes d'Animaux":     'from-emerald-500 to-teal-400',
-  'Contes Magiques':      'from-violet-500 to-purple-400',
+  'Contes De Fées':      'from-violet-500 to-purple-400',
   'Histoires du Soir':    'from-indigo-500 to-blue-400',
   "Contes d'Aventure":    'from-amber-500 to-orange-400',
   'Histoires Courtes':    'from-cyan-500 to-sky-400',
