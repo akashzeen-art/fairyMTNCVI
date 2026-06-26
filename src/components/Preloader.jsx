@@ -80,7 +80,7 @@ export default function Preloader({ onComplete }) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: 'easeInOut' }}
           className="fixed inset-0 z-[200] flex flex-col items-center justify-center overflow-hidden bg-fairy-deep"
-          aria-label="Chargement du portail de contes de fées"
+          aria-label="Chargement du portail FairyTales"
           aria-live="polite"
         >
           {/* ── Full-screen intro video ──────────────────────────── */}
@@ -150,7 +150,7 @@ export default function Preloader({ onComplete }) {
             {/* Title */}
             <div className="space-y-1">
               <h1 className="font-cinzel font-black text-3xl sm:text-5xl shimmer-text leading-tight">
-                Contes De Fées
+                FairyTales
               </h1>
               <p className="font-body text-fairy-mist/80 text-sm sm:text-base tracking-widest uppercase">
                 Un Monde de Rêve pour Enfants
